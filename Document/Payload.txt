@@ -1,0 +1,20 @@
+{
+  "header": {
+    "method_fullname": "",
+    "method_version": ""
+  },
+  "content": {
+    "machine_no": "M001",
+    "report_datetime": "20201230123030",
+    "row": [
+      {
+        "attrib_no": "counter",
+        "attrib_value": 30
+      },
+      {
+        "attrib_no": "Lot",
+        "attrib_value": "lot123"
+      }
+    ]
+  }
+}

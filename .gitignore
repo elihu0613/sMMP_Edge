@@ -1,0 +1,16 @@
+/_Library/Lib.Common/bin
+/_Library/Lib.Common/obj
+/0.Edge.Zeus/bin
+/0.Edge.Zeus/obj
+/1.Edge.ModbusTcp/bin
+/1.Edge.ModbusTcp/obj
+/1.Edge.OpcUa/bin
+/1.Edge.OpcUa/obj
+/1.Edge.WebApi/bin
+/1.Edge.WebApi/obj
+/2.Edge.Switchon/obj
+/1.Edge.CsvFile/bin
+/1.Edge.CsvFile/obj
+
+/Tools
+/2.Aider.Switchon/obj

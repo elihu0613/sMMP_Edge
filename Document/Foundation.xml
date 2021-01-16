@@ -1,0 +1,24 @@
+<Foundation xmlns="http://digiwin.com/iiot/foundation">
+  <Server Name="666" Disabled="0" UpdateTime="20210107172203">
+    <URL>http://127.0.0.1</URL>
+    <Eai Name="" Version="" Account="">
+      <URL>http://127.0.0.1</URL>
+    </Eai>
+    <MqttPort>1883</MqttPort>
+  </Server>
+  <Edge Name="666" Version=""/>
+  <ModbusTcp>
+    <Machine Name="M001" Production="1" Disabled="0">
+      <Version>WebService</Version>
+      <Address>127.0.0.1</Address>
+      <Port>502</Port>
+      <Row Cycle="10">
+        <Parameter Disabled="0" Channel="" FunctionCode="3" SlaveAddress="1" StartAddress="0">
+          <Element Id="0" AttribName="Status"/>
+        </Parameter>
+      </Row>
+    </Machine>
+  </ModbusTcp>
+  <OpcUa/>
+  <WebApi/>
+</Foundation>

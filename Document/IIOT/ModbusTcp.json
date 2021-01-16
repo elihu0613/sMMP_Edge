@@ -1,0 +1,49 @@
+{
+  "MachineBox": [
+    {
+      "MachineNo": "M001",
+      "Production": true,
+      "Disabled": false,
+      "Version": "WebService",
+      "Address": "127.0.0.1",
+      "Port": 502,
+      "Map": [
+        {
+          "Disabled": false,
+          "Channel": "Status",
+          "Cycle": 10,
+          "FunctionCode": 3,
+          "SlaveAddress": 1,
+          "StartAddress": 0,
+          "NumberOfPoints": [
+            {
+              "PointNo": 0,
+              "AttribName": "Status"
+            }
+          ]
+        },
+        {
+          "Disabled": false,
+          "Channel": "Parameter",
+          "FunctionCode": 3,
+          "SlaveAddress": 1,
+          "StartAddress": 0,
+          "NumberOfPoints": [
+            {
+              "PointNo": 0,
+              "AttribName": "01"
+            },
+            {
+              "PointNo": 1,
+              "AttribName": "02"
+            },
+            {
+              "PointNo": 2,
+              "AttribName": "03"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+﻿Server.Name: -app
+Server.Port: 8880, 8881
+Server.Account: admin
+Server.Password: admin
+
+Foundation.URL: smmp/edge/foundation
+Foundation.Document.Name: Foundation.xml
+
+Log.File.Name: Logs
+Log.Document.Name: log_.log
+Log.File.Template: "{NewLine}[{Timestamp:yyyyMMdd_HHmmss_fff}] {Level}{NewLine}{Message:j}{NewLine}{Exception}"
+
+IIOT.File.Name: IIOT 
+
+Modules:
+  - Enable: true
+    Launcher: ModbusTcp
+    Arguments: Stack.ModbusTcp.WorkBuilder, Stack.ModbusTcp.dll
+    IIOT.Path: Configs/IIOT/ModbusTcp.json
+
+  - Enable: true
+    Launcher: WebApi
+    Arguments: Stack.WebApi.WorkBuilder, Stack.WebApi.dll
+    IIOT.Path: Configs/IIOT/WebApi.json
+
+  - Enable: true
+    Launcher: OpcUa  
+    Arguments: Stack.OpcUA.WorkBuilder, Stack.OpcUa.dll
+    IIOT.Path: Configs/IIOT/OpcUa.json
+
+IsCloseConsole: false
+IsDebug: true

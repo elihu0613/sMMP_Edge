@@ -1,0 +1,48 @@
+{
+  "UpdateTime": "",
+  "Disabled": false,
+  "Server": {
+    "Name": "M001",
+    "MqttPort": 1883
+  },
+  "Edge": {
+    "Name": "M001",
+    "Version": ""
+  },
+  "Eai": {
+    "Name": "M001",
+    "Version": "M001",
+    "Account": "M001",
+    "URL": "http://127.0.0.1:5000/Service.svc"
+  },
+  "ModbusTcp": [
+    {
+      "MachineNo": "M001",
+      "Production": true,
+      "Disabled": false,
+      "Version": "WebService",
+      "Address": "127.0.0.1",
+      "Port": 502,
+      "Cycle": 10,
+      "Map": [
+        {
+          "Disabled": false,
+          "Channel": "Status",
+          "FunctionCode": 3,
+          "SlaveAddress": 1,
+          "StartAddress": 2,
+          "NumberOfPoints": [
+            {
+              "PointNo": 0,
+              "AttribName": "Status"
+            },
+            {
+              "PointNo": 1,
+              "AttribName": "asc"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
