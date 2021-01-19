@@ -14,14 +14,7 @@ namespace Lib.Common.Components.Verification
             FoundationRoot result = new();
             XNamespace ns = GlobalVariables.Foundation;
 
-            //GlobalApproach approach = new();
-
-            //if (value == "" || value == null)
-            //{
-            //    //lock (approach) GlobalApproach.LocalBuilder(new FoundationWriter(), new(new byte[] { 0, 0, 0, 0 }), null);
-
-            //    if (GlobalApproach.LocalBuilder(new FoundationWriter(), new(new byte[] { 0, 0, 0, 0 }), null)) return null;
-            //}
+            GlobalApproach approach = new();
 
             try
             {
@@ -30,10 +23,18 @@ namespace Lib.Common.Components.Verification
                 result.Disabled = xDocument.Root.Element(ns + "Server").Attribute("Disabled").Value == "1";
                 result.Server.Address = xDocument.Root.Element(ns + "Server").Element(ns + "URL").Value;
 
-                result.Eai.Name = xDocument.Root.Element(ns + "Server").Element(ns + "Eai").Attribute("Name").Value;
                 result.Eai.Version = xDocument.Root.Element(ns + "Server").Element(ns + "Eai").Attribute("Version").Value;
-                result.Eai.Account = xDocument.Root.Element(ns + "Server").Element(ns + "Eai").Attribute("Account").Value;
-                result.Eai.URL = xDocument.Root.Element(ns + "Server").Element(ns + "Eai").Element(ns + "URL").Value;
+
+                result.Eai.Host.Name = xDocument.Root.Element(ns + "Server").Element(ns + "Eai").Element(ns + "Host").Attribute("Name").Value;
+                result.Eai.Host.Version = xDocument.Root.Element(ns + "Server").Element(ns + "Eai").Element(ns + "Host").Attribute("Version").Value;
+                result.Eai.Host.Id = xDocument.Root.Element(ns + "Server").Element(ns + "Eai").Element(ns + "Host").Attribute("Id").Value;
+                result.Eai.Host.Language = xDocument.Root.Element(ns + "Server").Element(ns + "Eai").Element(ns + "Host").Attribute("Language").Value;
+                result.Eai.Host.Account = xDocument.Root.Element(ns + "Server").Element(ns + "Eai").Element(ns + "Host").Element(ns + "Account").Value;
+
+                result.Eai.Service.Name = xDocument.Root.Element(ns + "Server").Element(ns + "Eai").Element(ns + "Service").Attribute("Name").Value;
+                result.Eai.Service.Srvver = xDocument.Root.Element(ns + "Server").Element(ns + "Eai").Element(ns + "Service").Attribute("Srvver").Value;
+                result.Eai.Service.Id = xDocument.Root.Element(ns + "Server").Element(ns + "Eai").Element(ns + "Service").Attribute("Id").Value;
+                result.Eai.Service.Ip = xDocument.Root.Element(ns + "Server").Element(ns + "Eai").Element(ns + "Service").Element(ns + "Ip").Value;
 
                 result.Edge.Name = xDocument.Root.Element(ns + "Edge").Attribute("Name").Value;
                 result.Edge.Version = xDocument.Root.Element(ns + "Edge").Attribute("Version").Value;

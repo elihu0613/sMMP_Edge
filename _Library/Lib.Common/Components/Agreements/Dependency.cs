@@ -3,13 +3,13 @@
 namespace Lib.Common.Components.Agreements
 {
     [ServiceContract(Namespace = "http://entry.serviceengine.cross.digiwin.com")]
-    public interface ISoapServer
+    public interface ISOAP
     {
-        [OperationContract]
-        public string invokeSrv(string in0);
+        [OperationContract(Name = "invokeSrv")]
+        string InvokeSrv(string in0);
     }
 
-    public interface IProtocol
+    public interface IConstruction
     {
         public void Start();
     }

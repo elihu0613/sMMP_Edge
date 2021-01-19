@@ -1,8 +1,16 @@
 <Foundation xmlns="http://digiwin.com/iiot/foundation">
   <Server Name="666" Disabled="0" UpdateTime="20210107172203">
     <URL>http://127.0.0.1</URL>
-    <Eai Name="" Version="" Account="">
+    <Eai Version="">
       <URL>http://127.0.0.1</URL>
+      <Host Name="" Version="" Id="" Language="">
+        <Ip>127.0.0.1</Ip>
+        <Account>1.0</Account>
+      </Host>
+      <Service Name="" Srvver="" Id="">
+        <Ip>127.0.0.1</Ip>
+        <Method>1.0</Method>
+      </Service>
     </Eai>
     <MqttPort>1883</MqttPort>
   </Server>

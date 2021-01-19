@@ -1,26 +1,36 @@
 {
-  "UpdateTime": "",
+  "UpdateTime": "3456",
   "Disabled": false,
   "Server": {
-    "Name": "M001",
+    "Name": "MServer1",
     "MqttPort": 1883
   },
   "Edge": {
-    "Name": "M001",
-    "Version": ""
+    "Name": "MEdge1",
+    "Version": "2.0"
   },
   "Eai": {
-    "Name": "M001",
-    "Version": "M001",
-    "Account": "M001",
-    "URL": "http://127.0.0.1:5000/Service.svc"
+    "Version": "3.0",
+    "Host": {
+      "Name": "WEBACCESS",
+      "Version": "1.0",
+      "Id": "smmp",
+      "Account": "",
+      "Language": ""
+    },
+    "Service": {
+      "Name": "MES",
+      "Srvver": "",
+      "Ip": "10.40.140.139",
+      "Id": "MES"
+    }
   },
   "ModbusTcp": [
     {
       "MachineNo": "M001",
       "Production": true,
       "Disabled": false,
-      "Version": "WebService",
+      "Version": "mes",
       "Address": "127.0.0.1",
       "Port": 502,
       "Cycle": 10,

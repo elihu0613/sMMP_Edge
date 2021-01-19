@@ -6,6 +6,6 @@ namespace Edge.Zeus.Panels
 {
     internal class SimpleFactory
     {
-        internal static IProtocol BuildCommunicationStation(string service) => (IProtocol)Activator.CreateInstance(Assembly.LoadFrom(AppDomain.CurrentDomain.BaseDirectory + service.Split(',')[1]).GetType(service.Split(',')[0]));
+        internal static IConstruction BuildService(string service) => (IConstruction)Activator.CreateInstance(Assembly.LoadFrom(AppDomain.CurrentDomain.BaseDirectory + service.Split(',')[1]).GetType(service.Split(',')[0]));
     }
 }

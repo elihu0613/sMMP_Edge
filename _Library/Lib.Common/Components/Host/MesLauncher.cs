@@ -9,7 +9,7 @@ using static Lib.Common.Components.Func.ExtensionTools;
 
 namespace Lib.Common.Components.Host
 {
-    public class EaiLauncher : BaseStationFactory
+    public class MesLauncher : BaseStationFactory
     {
         public override async Task SendAsync(PayloadRoot root, HostChannel channel)
         {
@@ -160,13 +160,13 @@ namespace Lib.Common.Components.Host
                     xRow.Add(xReport);
 
                     xData.Add(xRow);
-                });               
-             
+                });
+
                 xRoot.Add(xPayload);
 
-                var request = new EaiServiceSOAP.IntegrationEntryClient(EaiServiceSOAP.IntegrationEntryClient.EndpointConfiguration.IntegrationEntry, GlobalVariables.EaiUrl);
+                var request = new MesServiceSOAP.wsEAISoapClient(MesServiceSOAP.wsEAISoapClient.EndpointConfiguration.wsEAISoap, GlobalVariables.MesUrl);
                 var response = await request.invokeSrvAsync(xRoot.ToString());
-                string result = response.Body.invokeSrvReturn;
+                string result = response.Body.invokeSrvResult;
 
                 Console.WriteLine(result);
             }

@@ -38,19 +38,8 @@ namespace Edge.Zeus.Panels
                                 {
                                     EnableModbusTcp = true;
                                     GlobalApproach.PipeBuilder(true, Communication.ModbusTcp);
-                                    IProtocol factory = SimpleFactory.BuildCommunicationStation(c.Arguments.Replace(" ", ""));
+                                    IConstruction factory = SimpleFactory.BuildService(c.Arguments.Replace(" ", ""));
                                     factory.Start();
-                                };
-                            });
-                            break;
-
-                        case nameof(Communication.WebApi):
-                            await Task.Run(() =>
-                            {
-                                if (c.Enable)
-                                {
-                                    EnableWebApi = true;
-                                    GlobalApproach.PipeBuilder(true, Communication.WebApi);
                                 };
                             });
                             break;
@@ -72,7 +61,6 @@ namespace Edge.Zeus.Panels
 
                 if (EnableCsvFile == false) GlobalApproach.PipeBuilder(false, Communication.CsvFile);
                 if (EnableModbusTcp == false) GlobalApproach.PipeBuilder(false, Communication.ModbusTcp);
-                if (EnableWebApi == false) GlobalApproach.PipeBuilder(false, Communication.WebApi);
                 if (EnableOpcUa == false) GlobalApproach.PipeBuilder(false, Communication.OpcUa);
 
                 Console.WriteLine("\n Local IP => " + GeneralTools.GetLocalIP());

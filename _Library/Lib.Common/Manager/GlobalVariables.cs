@@ -11,13 +11,13 @@ namespace Lib.Common.Manager
     {
         public static bool EnableCsvFile { get; set; }
         public static bool EnableModbusTcp { get; set; }
-        public static bool EnableWebApi { get; set; }
         public static bool EnableOpcUa { get; set; }
         public static bool EnableEdgeService { get; set; }
         public string NowTime { get; } = DateTime.Now.ToString("yyyyMMddHHmmss");
-        public static string EaiUrl => BasicMap.FoundationBasic.Server.Address + ":9999/IntegrationEntry";
         public static XNamespace Foundation { get; } = "http://digiwin.com/iiot/foundation";
-        private static FoundationProvider BasicMap { get; set; }
+        private static FoundationProvider BasicMap { get; set; } = new();
+        public static string EaiUrl => BasicMap.FoundationBasic.Server.Address + ":9999/IntegrationEntry";
+        public static string MesUrl => BasicMap.FoundationBasic.Server.Address + ":7018/SMES_Production_MESws_EAI/wsEAI.asmx";
         public static string EdgeTitle { get; } = "sMMP_Edge";
         public static string WelcomeTitle { get; } = "D I G I W I N";
         public static string ServiceTitle { get; } = "Server completes startup";
@@ -31,10 +31,5 @@ namespace Lib.Common.Manager
         public static string IIOTFilePath { get; } = AppDomain.CurrentDomain.BaseDirectory + LocalFileName + "\\" + YamlBase.Protagonist.IIOTFileName + "\\";
         public static string FoundationDocument { get; } = AppDomain.CurrentDomain.BaseDirectory + LocalFileName + "\\" + YamlBase.Protagonist.FoundationDocumentName;
         public static DateTime DtYamlBase { get; set; } = File.GetLastWriteTime(FoundationDocument);
-
-        public GlobalVariables()
-        {
-            BasicMap = new();
-        }
     }
 }

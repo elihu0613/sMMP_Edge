@@ -5,7 +5,7 @@ using Edge.ModbusTcp.Components;
 
 namespace Edge.ModbusTcp
 {
-    public class WorkBuilder : IProtocol
+    public class WorkBuilder : IConstruction
     {
         public void Start() => new HostBuilder().ConfigureServices(svcs => svcs.AddHostedService<ModbusTcpManager>()).Build().Run();
     }

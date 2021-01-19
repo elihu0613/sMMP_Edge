@@ -13,7 +13,8 @@
         WebService = 1,
         Kafka = 2,
         Eai = 3,
-        sMMP = 4
+        Smes = 4,
+        Smmp = 5
     }
 
     public enum HttpMethodType
@@ -38,9 +39,8 @@
         Undefined = 0,
         EdgeService = 1,
         ModbusTcp = 2,
-        WebApi = 3,
-        OpcUa = 4,
-        CsvFile = 5
+        OpcUa = 3,
+        CsvFile = 4
     }
 
     public enum HostChannel

@@ -17,7 +17,12 @@
 	  <ProjectReference Include="..\1.Edge.CsvFile\Edge.CsvFile.csproj" />
 	  <ProjectReference Include="..\1.Edge.ModbusTcp\Edge.ModbusTcp.csproj" />
 	  <ProjectReference Include="..\1.Edge.OpcUa\Edge.OpcUa.csproj" />
-	  <ProjectReference Include="..\1.Edge.WebApi\Edge.WebApi.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Content Update="appsettings.json">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
 	</ItemGroup>
 
 	<ItemGroup>

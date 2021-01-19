@@ -1,8 +1,6 @@
 ﻿using Edge.ModbusTcp.Components;
 using Edge.ModbusTcp.Models;
 using Lib.Common.Components.Agreements;
-using Lib.Common.Components.Func;
-using Lib.Common.Components.Host;
 using Lib.Common.Components.Models;
 using Lib.Common.Manager;
 using Lib.Common.Manager.Models;
@@ -159,7 +157,8 @@ namespace Edge.ModbusTcp.Pipeline
                             {
                                 if (MachineSwitch[sMachineNo] == true)
                                 {
-                                    //心跳斷線
+                                    //webapi <==
+
                                     Console.WriteLine($" No.{sMachineNo} => {e.Message}");
                                 }
 
@@ -229,25 +228,14 @@ namespace Edge.ModbusTcp.Pipeline
 
                             GlobalVariables globally = new();
 
-                            PayloadRoot payload = new()
+                            GlobalApproach.PushDataToHost(c.Channel, new()
                             {
                                 Version = sVersion,
                                 Production = bProduction,
                                 MachineNo = sMachineNo,
                                 ReportDateTime = globally.NowTime,
                                 Row = parameters
-                            };
-
-                            switch (payload.Version.FormatFirstCapitalized())
-                            {
-                                case nameof(HostTransaction.Eai):
-                                    GlobalApproach.ContactBuilder(new EaiLauncher(), payload, c.Channel);
-                                    break;
-
-                                default:
-                                    GlobalApproach.ContactBuilder(new MqttLauncher(), payload, c.Channel);
-                                    break;
-                            }
+                            });
                         });
                     });
                 });

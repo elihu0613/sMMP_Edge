@@ -1,4 +1,6 @@
 ﻿using Lib.Common.Components.Agreements;
+using Lib.Common.Components.Func;
+using Lib.Common.Components.Host;
 using Lib.Common.Components.Models;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -8,6 +10,24 @@ namespace Lib.Common.Manager
 {
     public class GlobalApproach
     {
+        public static void PushDataToHost(HostChannel channel, PayloadRoot payload)
+        {
+            switch (payload.Version.FormatFirstCapitalized())
+            {
+                case nameof(HostTransaction.Eai):
+                    ContactBuilder(new EaiLauncher(), payload, channel);
+                    break;
+
+                case nameof(HostTransaction.Smes):
+                    ContactBuilder(new MesLauncher(), payload, channel);
+                    break;
+
+                default:
+                    ContactBuilder(new MqttLauncher(), payload, channel);
+                    break;
+            }
+        }
+
         public static Func<JsonWriterFactory, IPAddress, string, bool> LocalBuilder { get; set; } = WriteLocalFile;
         public static Action<bool, Communication> PipeBuilder { get; set; } = BuildPipeTitle;
         public static Action<BaseStationFactory, PayloadRoot, HostChannel> ContactBuilder { get; set; } = PushHost;
@@ -34,7 +54,6 @@ namespace Lib.Common.Manager
             {
                 Communication.CsvFile => new string(' ', deep) + nowTime + nameof(Communication.CsvFile) + result + new string(' ', 8 + revise) + sign,
                 Communication.ModbusTcp => new string(' ', deep) + nowTime + nameof(Communication.ModbusTcp) + result + new string(' ', 6 + revise) + sign,
-                Communication.WebApi => new string(' ', deep) + nowTime + nameof(Communication.WebApi) + result + new string(' ', 9 + revise) + sign,
                 Communication.OpcUa => new string(' ', deep) + nowTime + nameof(Communication.OpcUa) + result + new string(' ', 10 + revise) + sign,
                 Communication.EdgeService => new string(' ', deep) + nowTime + nameof(Communication.EdgeService) + result + new string(' ', 4 + revise) + sign,
                 _ => null

@@ -27,17 +27,17 @@ namespace Lib.Common.Components.Host
             {
                 case HostChannel.Status:
                     clientId = payload.MachineNo + "#" + nameof(HostChannel.Status);
-                    topic = $"/{nameof(HostTransaction.sMMP).ToLower()}/{payload.MachineNo}/{nameof(WorkTasks.Collection).ToLower()}/{nameof(HostChannel.Status).ToLower()}";
+                    topic = $"/{nameof(HostTransaction.Smmp).ToLower()}/{payload.MachineNo}/{nameof(WorkTasks.Collection).ToLower()}/{nameof(HostChannel.Status).ToLower()}";
                     break;
 
                 case HostChannel.Parameter:
                     clientId = payload.MachineNo + "#" + nameof(HostChannel.Parameter);
-                    topic = $"/{nameof(HostTransaction.sMMP).ToLower()}/{payload.MachineNo}/{nameof(WorkTasks.Collection).ToLower()}/{nameof(HostChannel.Parameter).ToLower()}";
+                    topic = $"/{nameof(HostTransaction.Smmp).ToLower()}/{payload.MachineNo}/{nameof(WorkTasks.Collection).ToLower()}/{nameof(HostChannel.Parameter).ToLower()}";
                     break;
 
                 case HostChannel.Production:
                     clientId = payload.MachineNo + "#" + nameof(HostChannel.Production);
-                    topic = $"/{nameof(HostTransaction.sMMP).ToLower()}/{payload.MachineNo}/{nameof(WorkTasks.Collection).ToLower()}/{nameof(HostChannel.Production).ToLower()}";
+                    topic = $"/{nameof(HostTransaction.Smmp).ToLower()}/{payload.MachineNo}/{nameof(WorkTasks.Collection).ToLower()}/{nameof(HostChannel.Production).ToLower()}";
                     break;
             }
 
@@ -74,8 +74,7 @@ namespace Lib.Common.Components.Host
             }
             catch (Exception e)
             {
-                Console.WriteLine("Edge to server => " + e.Message);
-                LogBuilder.WriteLog(LogEventLevel.Error, "Edge to server => " + e.Message);
+                LogBuilder.WriteLog(LogEventLevel.Error, "MQTT Server => " + e.Message);
             }
         }
     }

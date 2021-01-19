@@ -32,9 +32,25 @@ namespace Lib.Common.Manager.Models
 
     public class EaiMap
     {
+        public string Version { get; set; }
+        public Host Host { get; set; } = new();
+        public Service Service { get; set; } = new();
+    }
+
+    public class Host
+    {
         public string Name { get; set; }
         public string Version { get; set; }
+        public string Id { get; set; }
         public string Account { get; set; }
-        public string URL { get; set; }
+        public string Language { get; set; }
+    }
+
+    public class Service
+    {
+        public string Name { get; set; }
+        public string Srvver { get; set; }
+        public string Ip { get; set; }
+        public string Id { get; set; }
     }
 }

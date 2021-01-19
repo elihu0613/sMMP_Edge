@@ -15,7 +15,7 @@ namespace Lib.Common.Manager
     public class FoundationWriter : JsonWriterFactory
     {
         public override bool Write(IPAddress serverAddress, string request)
-        {            
+        {
             try
             {
                 using StreamWriter stream = File.CreateText(FoundationDocument);
@@ -36,6 +36,11 @@ namespace Lib.Common.Manager
 
                 if (request != null) rootBox = JToken.Parse(request).ToObject<FoundationRoot>();
 
+                writer.WriteStartElement("Edge");
+                writer.WriteAttributeString("Name", rootBox.Edge.Name);
+                writer.WriteAttributeString("Version", rootBox.Edge.Version);
+                writer.WriteEndElement();
+
                 writer.WriteStartElement("Server");
                 writer.WriteAttributeString("Name", rootBox.Server.Name);
                 writer.WriteAttributeString("Disabled", rootBox.Disabled == true ? "1" : "0");
@@ -43,29 +48,40 @@ namespace Lib.Common.Manager
 
                 string address = serverAddress.ToString();
                 int nn = address.Split(':').Length;
-                //if (address.Split(':').Length == 1) address = ":::";
+                if (address.Split(':').Length == 1) address = ":::";
 
                 writer.WriteStartElement("URL");
-                writer.WriteString("http://" + address);//address.Split(':')[3]
-                writer.WriteEndElement();                
-
-                writer.WriteStartElement("Eai");
-                writer.WriteAttributeString("Name", rootBox.Eai.Name);
-                writer.WriteAttributeString("Version", rootBox.Eai.Version);
-                writer.WriteAttributeString("Account", rootBox.Eai.Account);
-                writer.WriteStartElement("URL");
-                writer.WriteString(rootBox.Eai.URL);
-                writer.WriteEndElement();
+                writer.WriteString("http://" + address.Split(':')[3]);
                 writer.WriteEndElement();
 
                 writer.WriteStartElement("MqttPort");
                 writer.WriteString(rootBox.Server.MqttPort.ToString());
                 writer.WriteEndElement();
+
+                writer.WriteStartElement("Eai");
+                writer.WriteAttributeString("Version", rootBox.Eai.Version);
+
+                writer.WriteStartElement("Host");
+                writer.WriteAttributeString("Name", rootBox.Eai.Host.Name);
+                writer.WriteAttributeString("Version", rootBox.Eai.Host.Version);
+                writer.WriteAttributeString("Id", rootBox.Eai.Host.Id);
+                writer.WriteAttributeString("Language", rootBox.Eai.Host.Language);
+
+                writer.WriteStartElement("Account");
+                writer.WriteString(rootBox.Eai.Host.Account);
+                writer.WriteEndElement();
                 writer.WriteEndElement();
 
-                writer.WriteStartElement("Edge");
-                writer.WriteAttributeString("Name", rootBox.Eai.Name);
-                writer.WriteAttributeString("Version", rootBox.Eai.Version);
+                writer.WriteStartElement("Service");
+                writer.WriteAttributeString("Name", rootBox.Eai.Service.Name);
+                writer.WriteAttributeString("Srvver", rootBox.Eai.Service.Srvver);
+                writer.WriteAttributeString("Id", rootBox.Eai.Service.Id);
+
+                writer.WriteStartElement("Ip");
+                writer.WriteString(rootBox.Eai.Service.Ip);
+                writer.WriteEndElement();
+                writer.WriteEndElement();
+                writer.WriteEndElement();
                 writer.WriteEndElement();
 
                 #region ModbusTcp
@@ -160,7 +176,8 @@ namespace Lib.Common.Manager
             }
             catch (Exception e)
             {
-                Console.WriteLine($"sMMP_A => {e.Message}\n{e.StackTrace}");
+                Console.WriteLine("sMMP => " + e.Message + "\n" + e.StackTrace);
+
                 return false;
             }
         }

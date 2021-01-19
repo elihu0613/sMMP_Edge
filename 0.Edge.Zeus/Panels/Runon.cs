@@ -1,3 +1,4 @@
+using Edge.Zeus.Controllers;
 using Edge.Zeus.Models;
 using Lib.Common.Components.Agreements;
 using Lib.Common.Manager;
@@ -10,11 +11,11 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
+using Serilog;
 using SoapCore;
 using System;
 using System.Diagnostics;
 using System.IO;
-using System.Net;
 using System.ServiceModel;
 
 namespace Edge.Zeus.Panels
@@ -23,15 +24,15 @@ namespace Edge.Zeus.Panels
     {
         public void ConfigureServices(IServiceCollection services)
         {
+            services.TryAddSingleton<ISOAP, WebController>();
+            services.AddSoapExceptionTransformer((e) => e.Message);
+            services.AddSoapCore();
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "sMMP.Edge", Version = "v1" });
             });
-
-            services.TryAddSingleton<ISoapServer, Controllers.WebServiceSOAP>();
-            services.AddSoapExceptionTransformer((e) => e.Message);
-            services.AddSoapCore();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -43,11 +44,13 @@ namespace Edge.Zeus.Panels
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "sMMP.Edge v1"));
             }
 
+            app.UseSerilogRequestLogging();
+
             app.UseRouting();
 
             app.UseAuthorization();
 
-            app.UseSoapEndpoint<ISoapServer>(Config.GetValue<string>("Server:WebService:Path"), new BasicHttpBinding(), SoapSerializer.DataContractSerializer);
+            app.UseSoapEndpoint<ISOAP>(Config.GetValue<string>("Server:WebService:Path"), new BasicHttpBinding(), SoapSerializer.DataContractSerializer);
 
             app.UseEndpoints(endpoints =>
             {

@@ -20,13 +20,7 @@ Modules:
     IIOT.Path: Configs/IIOT/ModbusTcp.json
 
   - Enable: false
-    Launcher: WebApi
-    Frequency:
-    Arguments: Edge.WebApi.WorkBuilder, Edge.WebApi.dll
-    IIOT.Path: Configs/IIOT/WebApi.json
-
-  - Enable: false
     Launcher: OpcUa
-    Frequency:
+    Frequency: 1
     Arguments: Edge.OpcUA.WorkBuilder, Edge.OpcUa.dll
     IIOT.Path: Configs/IIOT/OpcUa.json

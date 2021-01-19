@@ -35,19 +35,15 @@ namespace Edge.Zeus
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Runon>()
-                    .UseSerilog((context, logger) =>
-                    {
-                        logger.ReadFrom.Configuration(context.Configuration);
-                        logger.Enrich.FromLogContext();
-                    });
+            .UseSerilog()
+            .ConfigureWebHostDefaults(webBuilder =>
+            {
+                webBuilder.UseStartup<Runon>();
 
-                    GlobalApproach.PipeBuilder(true, Communication.EdgeService);
+                GlobalApproach.PipeBuilder(true, Communication.EdgeService);
 
-                    EnableEdgeService = true;
-                });
+                EnableEdgeService = true;
+            });
 
         private static DirectoryInfo DInfo { get; set; }
     }
